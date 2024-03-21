@@ -1,0 +1,62 @@
+dataset_settings:
+  # binary labels
+  root_path: # YOUR ROOT PATH TO CheXchoNet directory
+  label_cols:
+  - slvh
+  - dlv
+  - composite_slvh_dlv
+  # continuous labels
+  cont_label_cols:
+  - ivsd
+  - lvpwd
+  - lvidd
+  multi_view: false
+  include_demo: true
+  downsample_size: 224
+  adaptive_norm: false
+  brighten: false
+  gaussian_noise: true
+  gaussian_noise_settings:
+  - 0
+  - 0.05
+  center_cropped: false
+  multi_resolution: false
+  rand_affine: false
+  train: true
+  handle_nans: replace_zero
+  handle_minus_one: replace_zero
+metadata_df_paths:
+  train_metadata_path: #YOUR TRAIN METADATA PATH HERE
+  eval_metadata_path: #YOUR EVAL METADATA PATH HERE
+  test_metadata_path: #YOUR TEST METADATA PATH HERE
+use_jpg_dloader: true
+# binary label names, must be consistent with dataset_settings
+class_to_name:
+  - slvh
+  - dlv
+  - composite
+# continuous label names, must be consistent with dataset_settings
+class_to_name_continuous:
+- ivsd
+- lvpwd
+- lvidd
+num_labels: 3
+continuous_labels: true
+include_demo: true
+include_uncertainty: true
+input_size: 224
+model_kwargs:
+  drop_rate: 0.5
+batch_size: 32
+num_epochs: 2
+optimizer: adam
+optimizer_kwargs:
+  lr: 0.0005
+use_chexnet_pretrained: true
+use_lvhnet_pretrained: false
+use_auroc_loss: false
+ckpt_path: # YOUR PATH to pre-trained Chexnet model weights (model_checkpoint/chexnet.pth.tar)
+accumulate_grads_every_x_steps: 1
+train_metrics_every_x_batches: 100
+eval_metrics_every_x_batches: 50
+demo_size: 3
